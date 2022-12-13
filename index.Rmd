@@ -12,12 +12,12 @@ library(readxl)
 books=read_excel("Booklist.xlsx")
   
 
-booklist<-select(filter(books, Order >=2020 & Order < 2023),c(Title:Ethnicity))
+booklist<-select(filter(books, Order >=2020 & Order < 2023),c(Title:Genre))
 
 
-oldbooks<-select(filter(books, Order <2020 & Order >2015),c(Title:Ethnicity))
+oldbooks<-select(filter(books, Order <2020 & Order >2015),c(Title:Genre))
 
-unread <- books[str_detect(books$Order,"U"),] %>% select(c(Title:Ethnicity))
+unread <- books[str_detect(books$Order,"U"),] %>% select(c(Title:Genre))
 
 ```
 
