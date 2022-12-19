@@ -303,3 +303,14 @@ select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Aut
 ```{r}
 select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic)) %>% arrange(Title) %>% datatable()
 ```
+
+# Looking for Book Recommendations?
+These are some of the sites I look at for book reviews and lists of books.  
+* [Literary Hub](https://lithub.com/) - Recommendations and reviews over all categories  
+* [Book Riot](https://bookriot.com/) - Recommendations and reviews over all categories  
+* [Tor.com](https://www.tor.com/) - Science Fiction and Fantasy  
+* [Book Marks](https://bookmarks.reviews/) - Aggregated reviews of books  
+* [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022) - NPR's favourite books of the year (2022-2013), sortable by many categories  
+* [Literature Map](https://www.literature-map.com/) - Put in an author you like, and find a bunch of new ones you might enjoy  
+* [Five Books](https://fivebooks.com/) - Top 5's in a bunch of categories  
+* [Electric Literature](https://electricliterature.com/) - Reading lists, articles, essays, and more  
