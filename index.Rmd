@@ -17,7 +17,7 @@ allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% 
 
 bestbooks <- select(filter(allbooks,!is.na(Category)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description)) 
 
-booklist<-select(filter(allbooks, !is.na(Started)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre))
+booklist<-select(filter(allbooks, !is.na(Started)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Country))
 
 current_list <- select(filter(allbooks,!is.na(Last5)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description,Last5))
 
@@ -296,12 +296,12 @@ booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable()
 ## Personal Bookshelf {.tabset .tabset-pills}
 ### Unread
 ```{r}
-select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic)) %>% arrange(Title) %>% datatable()
+select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable()
 ```
 
 ### Read
 ```{r}
-select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic)) %>% arrange(Title) %>% datatable()
+select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable()
 ```
 
 # Looking for Book Recommendations?
