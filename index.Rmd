@@ -132,7 +132,7 @@ These are the last 5 books that I've finished.
 latest_books("Last")
 ```
 # Best Books of 2020 to 2022
-The books in these sections are all ones that I've read since the start of 2020 (not necessarily books published in those years). I have put the authors whose works of fiction I've read and enjoyed at least 5 of (separate from single series) in their own categories here, because they would take up a lot of the different years' top books. I've also enjoyed reading a number of science fiction and fantasy series. Rather than choose individual ones for best-of-year lists, I'm just listing my favourite series in whole here on their own.  After that are my favourite primarily standalone works in fiction or non-fiction that I read in each of those years. They are ordered by when I read them during the year.
+The books in these sections are all ones that I've read since the start of 2020 (not necessarily books published in those years). I have put the authors whose works of fiction I've read and enjoyed at least 5 of (separate from single series) in their own categories here, because they would take up a lot of the different years' top books. After that are my favourite primarily standalone works in fiction or non-fiction that I read in each of those years. They are ordered by when I read them during the year. I've also enjoyed reading a number of science fiction and fantasy series. Rather than choose individual ones for best-of-year lists, I'm just listing my favourite series in whole here on their own.
 
 
 ## Favourite Authors {.tabset .tabset-pills}
@@ -154,6 +154,57 @@ author_table("Chambers")
 author_table("Thomas King")
 ```
 
+## 2022 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2022F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2022N")
+```
+### Stats
+```{r}
+stat_summary(2022)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2022) %>% datatable()
+```
+## 2021 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2021F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2021N")
+```
+### Stats
+```{r}
+stat_summary(2021)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2021) %>% datatable()
+```
+## 2020 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2020F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2020N")
+```
+### Stats
+```{r}
+stat_summary(2020)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2020) %>% datatable()
+```
 ## Favourite Sci-Fi / Fantasy Series {.tabset .tabset-pills}
 ### The Expanse
 ```{r}
@@ -190,46 +241,6 @@ series_table("Teixcalaan")
 ### The Machineries of Empire
 ```{r}
 series_table("Machineries")
-```
-
-## 2022 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2022F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2022N")
-```
-### Stats
-```{r}
-stat_summary(2022)
-```
-## 2021 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2021F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2021N")
-```
-### Stats
-```{r}
-stat_summary(2021)
-```
-## 2020 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2020F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2020N")
-```
-### Stats
-```{r}
-stat_summary(2020)
 ```
 # Top 25's
 
