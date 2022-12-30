@@ -1,7 +1,7 @@
 ---
 title: "A Place For My Books"
 
-output: rmdformats::material
+output: rmdformats::readthedown
 ---
 
 ```{r setup, echo = FALSE, message = FALSE, warning=FALSE}
