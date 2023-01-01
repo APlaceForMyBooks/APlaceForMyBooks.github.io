@@ -135,7 +135,7 @@ These are the last 5 books that I've finished.
 ```{r}
 latest_books("Last")
 ```
-# Best Books of 2020 to 2022
+# Best Books Read Since 2020
 The books in these sections are all ones that I've read since the start of 2020 (not necessarily books published in those years). I have put the authors whose works of fiction I've read and enjoyed at least 5 of (separate from single series) in their own categories here, because they would take up a lot of the different years' top books. After that are my favourite primarily standalone works in fiction or non-fiction that I read in each of those years. They are ordered by when I read them during the year. I've also enjoyed reading a number of science fiction and fantasy series. Rather than choose individual ones for best-of-year lists, I'm just listing my favourite series in whole here on their own.
 
 # Authors
