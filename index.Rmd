@@ -124,7 +124,7 @@ kbl(totals_year)  %>%
 # Welcome
 As an avid reader and an avid data nerd, I decided to create this site to track some of my reading and favourite books, both for my own interest and for anyone looking for good book recommendations. Links where applicable are to independent bookstores. Support libraries and independent bookstores!
 
-Check out some of my favourite or most memorable [quotes](quotes.html)
+* [Quotes](quotes.html)
 
 ## Current Reading {.tabset .tabset-pills}
 ### Current Books Reading

@@ -1,7 +1,10 @@
 ---
 title: "Memorable Quotes"
-output: rmdformats::material
+output: rmdformats::readthedown
 ---
+
+# Index
+* [Home](index.html)
 
 # How to Keep House While Drowning, by K.C. Davis
 * ...the key to juggling is to know that some of the balls you have in the air are made of plastic & some are made of glass.
