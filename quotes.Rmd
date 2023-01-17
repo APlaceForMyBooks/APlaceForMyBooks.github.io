@@ -1,0 +1,20 @@
+---
+title: "Memorable Quotes"
+output: rmdformats::material
+---
+
+# How to Keep House While Drowning, by K.C. Davis
+* ...the key to juggling is to know that some of the balls you have in the air are made of plastic & some are made of glass.
+
+* No one ever shamed themselves into better mental health.
+
+* If I viewed a day of screen time and not doing any scheduled care tasks as a failure, it would be a lot harder to “get back into routine.” But I didn’t. Trolls and pj’s day was a day when we were being gentle with ourselves, allowing ourselves to take it easy and rest—a day of kindness. Framing it as kindness instead of failure was the key to being able to wake up and choose to get things done the next day.
+
+# Good Inside: A Guide to Becoming the Parent You Want to Be, by Becky Kennedy
+* As a parent, I challenge myself to sit with my child in his feeling of distress so he knows he isn’t alone, as opposed to pulling my child out of this moment, which leaves him alone the next time he finds himself there.
+
+* ...if I look for perfect, I’ll miss growth . . . and I’m a pretty big fan of growth.
+
+* Building resilience is about developing the capacity to tolerate distress, to stay in and with a tough, challenging moment, to find our footing and our goodness even when we don’t have confirmation of achievement or pending success.
+
+* As a result, many parents see behavior as the measure of who our kids are, rather than using behavior as a clue to what our kids might need.
