@@ -6,11 +6,49 @@ output: rmdformats::readthedown
 ## Index
 * [Home](index.html)
 
-## 2020 Reads {.tabset .tabset-pills}
+## 2023 Reads {.tabset .tabset-pills}
+### Fiction
+#### Land of Big Numbers, by Te-Ping Chen
+* She laughed a lot, and easily. It wasn't until we actually became friends that I realized she was often very sad. America is like that, I must say, free and easy until you know better.
 
+* They were fond of each other, and that was more than you could say about most marriages.
 
-## 2021 Reads {.tabset .tabset-pills}
+* A great wasteland of sorrow was opening up in him, unfolding dozens of tiny shacks, terrible squatters setting up residence, banging their miniature liquor bottles against his chest, a hundred feet trampling his organs.
 
+#### Foster, by Claire Keegan
+* 'You don’t ever have to say anything,’ he says. ‘Always remember that as a thing you need never do. Many’s the man lost much just because he missed a perfect opportunity to say nothing.'
+
+* Neither one of us talks, the way people sometimes don’t when they are happy – but as soon as I have this thought, I realise its opposite is also true.
+
+### Non-Fiction
+#### Good Inside: A Guide to Becoming the Parent You Want to Be, by Becky Kennedy
+* As a parent, I challenge myself to sit with my child in his feeling of distress so he knows he isn’t alone, as opposed to pulling my child out of this moment, which leaves him alone the next time he finds himself there.
+
+* ...if I look for perfect, I’ll miss growth . . . and I’m a pretty big fan of growth.
+
+* Building resilience is about developing the capacity to tolerate distress, to stay in and with a tough, challenging moment, to find our footing and our goodness even when we don’t have confirmation of achievement or pending success.
+
+* As a result, many parents see behavior as the measure of who our kids are, rather than using behavior as a clue to what our kids might need.
+
+#### How to Keep House While Drowning, by K.C. Davis
+* ...the key to juggling is to know that some of the balls you have in the air are made of plastic & some are made of glass.
+
+* No one ever shamed themselves into better mental health.
+
+* If I viewed a day of screen time and not doing any scheduled care tasks as a failure, it would be a lot harder to “get back into routine.” But I didn’t. Trolls and pj’s day was a day when we were being gentle with ourselves, allowing ourselves to take it easy and rest—a day of kindness. Framing it as kindness instead of failure was the key to being able to wake up and choose to get things done the next day.
+
+#### The Dawn of Everything, by David Graeber & David Wengrow
+* We are projects of collective self-creation. What if we approached human history that way? What if we treat people, from the beginning, as imaginative, intelligent, playful creatures who deserve to be understood as such? What if, instead of telling a story about how our species fell from some idyllic state of equality, we ask how we came to be trapped in such tight conceptual shackles that we can no longer even imagine the possibility of reinventing ourselves?
+
+* That indigenous Americans lived in generally free societies, and that Europeans did not, was never really a matter of debate in these exchanges: both sides agreed this was the case.
+
+* If human beings, through most of our history, have moved back and forth fluidly between different social arrangements, assembling and dismantling hierarchies on a regular basis, maybe the real question should be ‘how did we get stuck?’ How did we end up in one single mode? How did we lose that political self-consciousness, once so typical of our species? How did we come to treat eminence and subservience not as temporary expedients, or even the pomp and circumstance of some kind of grand seasonal theatre, but as inescapable elements of the human condition? If we started out just playing games, at what point did we forget that we were playing?
+
+* We will suggest that there is a reason why so many key Enlightenment thinkers insisted that their ideals of individual liberty and political equality were inspired by Native American sources and examples. Because it was true.
+
+* Fascination with the question of social inequality was relatively new in the 1700s, and it had everything to do with the shock and confusion that followed Europe’s sudden integration into a global economy, where it had long been a very minor player.
+
+* Kandiaronk: I have spent six years reflecting on the state of European society and I still can’t think of a single way they act that’s not inhuman, and I genuinely think this can only be the case, as long as you stick to your distinctions of ‘mine’ and ‘thine’. I affirm that what you call money is the devil of devils; the tyrant of the French, the source of all evils; the bane of souls and slaughterhouse of the living. To imagine one can live in the country of money and preserve one’s soul is like imagining one could preserve one’s life at the bottom of a lake. Money is the father of luxury, lasciviousness, intrigues, trickery, lies, betrayal, insincerity, – of all the world’s worst behaviour. Fathers sell their children, husbands their wives, wives betray their husbands, brothers kill each other, friends are false, and all because of money. In the light of all this, tell me that we Wendat are not right in refusing to touch, or so much as to look at silver?
 
 ## 2022 Reads {.tabset .tabset-pills}
 ### Fiction
@@ -1052,46 +1090,12 @@ As the young boy listened I could see the same things going on in his face that 
 #### Laughing with the Trickster, by Tomson Highway
 * As for all the languages the whole world over, they are so different one from the other that the result, if they were spoken all at once, would be a cacophony, a dreadful clattering of wayward consonants. Still, all are here for a reason. Each has its genius, its strength, its applicability. Most pointedly, if botanists tell us that the Amazon jungle has plants and herbs that number in the millions, each of which holds the key to a possible cure for physical ailments, illness, and disease, then languages function likewise. The difference is that the ailments they address are not so much physical as emotional, psychological, and spiritual, ailments that can be just as debilitating, just as lethal.
 
-## 2023 Reads {.tabset .tabset-pills}
-### Fiction
-#### Foster, by Claire Keegan
-* 'You don’t ever have to say anything,’ he says. ‘Always remember that as a thing you need never do. Many’s the man lost much just because he missed a perfect opportunity to say nothing.'
+## 2021 Reads {.tabset .tabset-pills}
 
-* Neither one of us talks, the way people sometimes don’t when they are happy – but as soon as I have this thought, I realise its opposite is also true.
+## 2020 Reads {.tabset .tabset-pills}
 
-#### Land of Big Numbers, by Te-Ping Chen
-* She laughed a lot, and easily. It wasn't until we actually became friends that I realized she was often very sad. America is like that, I must say, free and easy until you know better.
 
-* They were fond of each other, and that was more than you could say about most marriages.
 
-* A great wasteland of sorrow was opening up in him, unfolding dozens of tiny shacks, terrible squatters setting up residence, banging their miniature liquor bottles against his chest, a hundred feet trampling his organs.
 
-### Non-Fiction
-#### The Dawn of Everything, by David Graeber & David Wengrow
-* We are projects of collective self-creation. What if we approached human history that way? What if we treat people, from the beginning, as imaginative, intelligent, playful creatures who deserve to be understood as such? What if, instead of telling a story about how our species fell from some idyllic state of equality, we ask how we came to be trapped in such tight conceptual shackles that we can no longer even imagine the possibility of reinventing ourselves?
 
-* That indigenous Americans lived in generally free societies, and that Europeans did not, was never really a matter of debate in these exchanges: both sides agreed this was the case.
 
-* If human beings, through most of our history, have moved back and forth fluidly between different social arrangements, assembling and dismantling hierarchies on a regular basis, maybe the real question should be ‘how did we get stuck?’ How did we end up in one single mode? How did we lose that political self-consciousness, once so typical of our species? How did we come to treat eminence and subservience not as temporary expedients, or even the pomp and circumstance of some kind of grand seasonal theatre, but as inescapable elements of the human condition? If we started out just playing games, at what point did we forget that we were playing?
-
-* We will suggest that there is a reason why so many key Enlightenment thinkers insisted that their ideals of individual liberty and political equality were inspired by Native American sources and examples. Because it was true.
-
-* Fascination with the question of social inequality was relatively new in the 1700s, and it had everything to do with the shock and confusion that followed Europe’s sudden integration into a global economy, where it had long been a very minor player.
-
-* Kandiaronk: I have spent six years reflecting on the state of European society and I still can’t think of a single way they act that’s not inhuman, and I genuinely think this can only be the case, as long as you stick to your distinctions of ‘mine’ and ‘thine’. I affirm that what you call money is the devil of devils; the tyrant of the French, the source of all evils; the bane of souls and slaughterhouse of the living. To imagine one can live in the country of money and preserve one’s soul is like imagining one could preserve one’s life at the bottom of a lake. Money is the father of luxury, lasciviousness, intrigues, trickery, lies, betrayal, insincerity, – of all the world’s worst behaviour. Fathers sell their children, husbands their wives, wives betray their husbands, brothers kill each other, friends are false, and all because of money. In the light of all this, tell me that we Wendat are not right in refusing to touch, or so much as to look at silver?
-
-#### How to Keep House While Drowning, by K.C. Davis
-* ...the key to juggling is to know that some of the balls you have in the air are made of plastic & some are made of glass.
-
-* No one ever shamed themselves into better mental health.
-
-* If I viewed a day of screen time and not doing any scheduled care tasks as a failure, it would be a lot harder to “get back into routine.” But I didn’t. Trolls and pj’s day was a day when we were being gentle with ourselves, allowing ourselves to take it easy and rest—a day of kindness. Framing it as kindness instead of failure was the key to being able to wake up and choose to get things done the next day.
-
-#### Good Inside: A Guide to Becoming the Parent You Want to Be, by Becky Kennedy
-* As a parent, I challenge myself to sit with my child in his feeling of distress so he knows he isn’t alone, as opposed to pulling my child out of this moment, which leaves him alone the next time he finds himself there.
-
-* ...if I look for perfect, I’ll miss growth . . . and I’m a pretty big fan of growth.
-
-* Building resilience is about developing the capacity to tolerate distress, to stay in and with a tough, challenging moment, to find our footing and our goodness even when we don’t have confirmation of achievement or pending success.
-
-* As a result, many parents see behavior as the measure of who our kids are, rather than using behavior as a clue to what our kids might need.

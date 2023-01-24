@@ -124,23 +124,107 @@ kbl(totals_year)  %>%
 # Welcome
 As an avid reader and an avid data nerd, I decided to create this site to track some of my reading and favourite books, both for my own interest and for anyone looking for good book recommendations. Links where applicable are to independent bookstores. Support libraries and independent bookstores!
 
-* [Quotes](quotes.html)
+The yearly lists are ordered chronologically rather than ranked.  The author lists are ordered by publication date.
 
 ## Current Reading {.tabset .tabset-pills}
-### Current Books Reading
-These are the books I'm reading right now. I often have an e-book from the library, a paper book from either my shelf or the library, and an active read-aloud book.
+### Books I am currently reading
 ```{r}
 latest_books("Current")
 ```
-### Last 5 Books Read
-These are the last 5 books that I've finished.
+### Last 5 books completed
 ```{r}
 latest_books("Last")
 ```
-# Best Books Read Since 2020
-The books in these sections are all ones that I've read since the start of 2020 (not necessarily books published in those years). I have put the authors whose works of fiction I've read and enjoyed at least 5 of (separate from single series) in their own categories here, because they would take up a lot of the different years' top books. After that are my favourite primarily standalone works in fiction or non-fiction that I read in each of those years. They are ordered by when I read them during the year. I've also enjoyed reading a number of science fiction and fantasy series. Rather than choose individual ones for best-of-year lists, I'm just listing my favourite series in whole here on their own.
+# Yearly Lists
+## 2023 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
 
-# Authors
+```
+### Top 10 Non-Fiction
+```{r}
+
+```
+### Memorable Quotes {.tabset .tabset-pills}
+```{r results='asis'}
+cat(readLines('Quotes2023.txt'), sep = '\n')
+```
+
+### Stats
+```{r}
+stat_summary(2023)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2023) %>% datatable()
+```
+## 2022 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2022F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2022N")
+```
+### Memorable Quotes {.tabset .tabset-pills}
+```{r results='asis'}
+cat(readLines('Quotes2022.txt'), sep = '\n')
+```
+
+### Stats
+```{r}
+stat_summary(2022)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2022) %>% datatable()
+```
+## 2021 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2021F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2021N")
+```
+### Memorable Quotes {.tabset .tabset-pills}
+```{r results='asis'}
+cat(readLines('Quotes2021.txt'), sep = '\n')
+```
+
+### Stats
+```{r}
+stat_summary(2021)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2021) %>% datatable()
+```
+## 2020 {.tabset .tabset-pills}
+### Top 10 Fiction
+```{r}
+year_table("2020F")
+```
+### Top 10 Non-Fiction
+```{r}
+year_table("2020N")
+```
+### Memorable Quotes {.tabset .tabset-pills}
+```{r results='asis'}
+cat(readLines('Quotes2020.txt'), sep = '\n')
+```
+
+### Stats
+```{r}
+stat_summary(2020)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2020) %>% datatable()
+```
+# Favourite Authors and Series - Excluded from Yearly Lists
 ## Favourite Authors {.tabset .tabset-pills}
 ### Richard Wagamese
 ```{r}
@@ -159,62 +243,6 @@ author_table("Chambers")
 ```{r}
 author_table("Thomas King")
 ```
-
-# Best Books of 2022
-## 2022 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2022F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2022N")
-```
-### Stats
-```{r}
-stat_summary(2022)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2022) %>% datatable()
-```
-# Best Books of 2021
-## 2021 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2021F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2021N")
-```
-### Stats
-```{r}
-stat_summary(2021)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2021) %>% datatable()
-```
-# Best Books of 2020
-## 2020 {.tabset .tabset-pills}
-### Top 10 Fiction
-```{r}
-year_table("2020F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2020N")
-```
-### Stats
-```{r}
-stat_summary(2020)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2020) %>% datatable()
-```
-# Series
 ## Favourite Sci-Fi / Fantasy Series {.tabset .tabset-pills}
 ### The Expanse
 ```{r}
@@ -252,10 +280,10 @@ series_table("Teixcalaan")
 ```{r}
 series_table("Machineries")
 ```
-# Top 25's
-Here I went further back, as my book tracking includes back to 2015, and I also pulled in some books I've read over years before that, and tried to make an active list of top 25 books in each category, regardless of when I read them. There is lots of overlap with the 3 years above due to the number of books I read.  A note on earth-based and non-earth based is simply that some of the sci-fi series were set on Earth or specified Earth-origin characters, and some were not. This made a reasonable way to split them in half rather than having a list of 50 books.
 
-# Top Fiction Lists
+# Top 25's
+These include books read back to 2015 and occasionally before.
+
 ## Fiction {.tabset .tabset-pills}
 ### Favourite Authors
 ```{r}
@@ -282,7 +310,6 @@ top_25_other("Contemporary")
 top_25_other("Historical")
 ```
 
-# Top Non-Fiction Lists
 ## Non-Fiction {.tabset .tabset-pills}
 ### History / Memoir / Narrative
 ```{r}
@@ -300,11 +327,10 @@ top_25_other("Science")
 ```{r}
 top_25_other("Other")
 ```
+
 # Full Lists
+Lists are sortable and searchable. First is the fiction and non-fiction I've read since 2015 (when I started tracking), then are the books I currently own, split into read and unread.
 
-Since I've been actively tracking my reading (2015 and on), below are the fiction and non-fiction I've read in that time.  The lists are sortable and searchable. Following that are books I have on my shelf. They're separated into unread and read, and can be searched and sorted.
-
-# Books I've Read
 ## Reading List {.tabset .tabset-pills}
 ### Fiction read since 2015
 ```{r}
@@ -316,7 +342,6 @@ booklist %>% filter(!str_detect(FicNonfic,"Non")) %>% datatable()
 booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable()
 ```
 
-# Books I Have
 ## Personal Bookshelf {.tabset .tabset-pills}
 ### Unread
 ```{r}
