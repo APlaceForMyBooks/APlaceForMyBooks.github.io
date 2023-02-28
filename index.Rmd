@@ -12,17 +12,11 @@ library(googlesheets4)
 library(kableExtra)
 library(lubridate)
 library(janitor)
-
 allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% as_tibble() %>%  mutate_at(c("Published","Started","Finished"),ymd) 
-
 bestbooks <- select(filter(allbooks,!is.na(Category)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description)) 
-
 booklist<-select(filter(allbooks, !is.na(Started)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Country))
-
 current_list <- select(filter(allbooks,!is.na(Last5)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description,Last5))
-
 unread <- allbooks[str_detect(allbooks$Order,"U"),] %>% select(c(Title,Author,Published,Pages,FicNonfic,Genre))
-
 image_table <- function(text_tbl,image_tbl) {
   kbl(text_tbl) %>%
   kable_paper(full_width = F) %>%
@@ -32,7 +26,6 @@ image_table <- function(text_tbl,image_tbl) {
   column_spec(4, width = "60%") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
-
 author_table <- function(author) {
   author_data <- bestbooks %>% filter(str_detect(Author,author)) %>% filter(str_detect(BestCat,"Authors")) %>% arrange(Published)
 text_tbl <- data.frame(
@@ -42,7 +35,6 @@ text_tbl <- data.frame(
   Description = author_data$Description)
 image_table(text_tbl,author_data)
 }
-
 series_table <- function(series_name) {
   series_data <- bestbooks %>% filter(str_detect(Series,series_name)) %>% filter(str_detect(BestCat,"Series")) %>% arrange(Published)
   text_tbl <- data.frame(
@@ -52,7 +44,6 @@ series_table <- function(series_name) {
   Description = series_data$Description)
 image_table(text_tbl,series_data)
 }
-
 year_table <- function(yearbest) {
   year_data <- bestbooks %>% filter(str_detect(BestCat,yearbest)) %>% arrange (Finished)
   text_tbl <- data.frame(
@@ -62,7 +53,6 @@ year_table <- function(yearbest) {
   Description = year_data$Description)
 image_table(text_tbl,year_data)
 }
-
 top_25_authors <- function() {
   top_data <- bestbooks %>% filter(str_detect(Category,"Authors")) %>% arrange(Author,Published)
   text_tbl <- data.frame(
@@ -74,7 +64,6 @@ top_25_authors <- function() {
   column_spec(2, width = "50%") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
-
 top_25_series <- function(seriestype) {
   top_data <- bestbooks %>% filter(str_detect(Category,seriestype)) %>% arrange(Series,Published)
   text_tbl <- data.frame(
@@ -100,7 +89,6 @@ top_25_other <- function(cat_choice) {
   column_spec(2, width = "50%") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
-
 latest_books <- function(timing) {
   book_data <- current_list %>% filter(str_detect(Last5,timing)) %>%  arrange(Started)
 text_tbl <- data.frame(
@@ -110,7 +98,6 @@ text_tbl <- data.frame(
   Description = book_data$Description)
 image_table(text_tbl,book_data)
 }
-
 stat_summary <- function(year) {
   totals_year = booklist %>% filter(year(Finished) == year) %>% group_by(FicNonfic) %>% dplyr::summarise(PageCount = sum(Pages),BookCount = n_distinct(Title)) %>% adorn_totals("row", fill = "Total") %>% mutate (PageCount = formatC(round(PageCount),format = "f", big.mark = ",", drop0trailing = TRUE))
 kbl(totals_year)  %>%
@@ -119,7 +106,6 @@ kbl(totals_year)  %>%
   column_spec(2, width = "50%") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
-
 ```
 # Welcome
 As an avid reader and an avid data nerd, I decided to create this site to track some of my reading and favourite books, both for my own interest and for anyone looking for good book recommendations. Links where applicable are to independent bookstores. Support libraries and independent bookstores!
@@ -139,17 +125,10 @@ latest_books("Last")
 ## 2023 {.tabset .tabset-pills}
 ### Top 10 Fiction
 ```{r}
-
 ```
 ### Top 10 Non-Fiction
 ```{r}
-
 ```
-### Memorable Quotes {.tabset .tabset-pills}
-```{r results='asis'}
-cat(readLines('Quotes2023.txt'), sep = '\n')
-```
-
 ### Stats
 ```{r}
 stat_summary(2023)
@@ -167,11 +146,6 @@ year_table("2022F")
 ```{r}
 year_table("2022N")
 ```
-### Memorable Quotes {.tabset .tabset-pills}
-```{r results='asis'}
-cat(readLines('Quotes2022.txt'), sep = '\n')
-```
-
 ### Stats
 ```{r}
 stat_summary(2022)
@@ -189,11 +163,6 @@ year_table("2021F")
 ```{r}
 year_table("2021N")
 ```
-### Memorable Quotes {.tabset .tabset-pills}
-```{r results='asis'}
-cat(readLines('Quotes2021.txt'), sep = '\n')
-```
-
 ### Stats
 ```{r}
 stat_summary(2021)
@@ -211,11 +180,6 @@ year_table("2020F")
 ```{r}
 year_table("2020N")
 ```
-### Memorable Quotes {.tabset .tabset-pills}
-```{r results='asis'}
-cat(readLines('Quotes2020.txt'), sep = '\n')
-```
-
 ### Stats
 ```{r}
 stat_summary(2020)
