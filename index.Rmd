@@ -12,11 +12,13 @@ library(googlesheets4)
 library(kableExtra)
 library(lubridate)
 library(janitor)
-allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% as_tibble() %>%  mutate_at(c("Published","Started","Finished"),ymd) 
-bestbooks <- select(filter(allbooks,!is.na(Category)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description)) 
-booklist<-select(filter(allbooks, !is.na(Started)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Country))
-current_list <- select(filter(allbooks,!is.na(Last5)),c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description,Last5))
-unread <- allbooks[str_detect(allbooks$Order,"U"),] %>% select(c(Title,Author,Published,Pages,FicNonfic,Genre))
+
+allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% as_tibble() %>%  mutate_at(c("Published","Started","Finished"),ymd)
+
+bestbooks <- allbooks %>% select(c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description)) 
+
+booklist<-select(filter(bestbooks, !is.na(Started)),c(Title,Author,Started,Finished,Pages,FicNonfic))
+
 image_table <- function(text_tbl,image_tbl) {
   kbl(text_tbl) %>%
   kable_paper(full_width = F) %>%
@@ -26,24 +28,17 @@ image_table <- function(text_tbl,image_tbl) {
   column_spec(4, width = "60%") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
-author_table <- function(author) {
-  author_data <- bestbooks %>% filter(str_detect(Author,author)) %>% filter(str_detect(BestCat,"Authors")) %>% arrange(Published)
+
+best_table <- function(best_cat) {
+  best_data <- bestbooks %>%  filter(str_detect(Category,best_cat)) %>% arrange(Author,Published)
 text_tbl <- data.frame(
   Cover ='',
-  Book = author_data$LinkedTitle,
-  Author = author_data$Author,
-  Description = author_data$Description)
-image_table(text_tbl,author_data)
+  Book = best_data$LinkedTitle,
+  Author = best_data$Author,
+  Description = best_data$Description)
+image_table(text_tbl,best_data)
 }
-series_table <- function(series_name) {
-  series_data <- bestbooks %>% filter(str_detect(Series,series_name)) %>% filter(str_detect(BestCat,"Series")) %>% arrange(Published)
-  text_tbl <- data.frame(
-  Covers ='',
-  Book = series_data$LinkedTitle,
-  Author = series_data$Author,
-  Description = series_data$Description)
-image_table(text_tbl,series_data)
-}
+
 year_table <- function(yearbest) {
   year_data <- bestbooks %>% filter(str_detect(BestCat,yearbest)) %>% arrange (Finished)
   text_tbl <- data.frame(
@@ -53,51 +48,7 @@ year_table <- function(yearbest) {
   Description = year_data$Description)
 image_table(text_tbl,year_data)
 }
-top_25_authors <- function() {
-  top_data <- bestbooks %>% filter(str_detect(Category,"Authors")) %>% arrange(Author,Published)
-  text_tbl <- data.frame(
-    Book = top_data$Title,
-    Author = top_data$Author)
-  kbl(text_tbl) %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, width = "50%") %>%
-  column_spec(2, width = "50%") %>%
-  kable_classic(full_width = F, html_font = "Cambria")
-}
-top_25_series <- function(seriestype) {
-  top_data <- bestbooks %>% filter(str_detect(Category,seriestype)) %>% arrange(Series,Published)
-  text_tbl <- data.frame(
-    Book = top_data$Title,
-    Author = top_data$Author,
-    Series = top_data$Series)
-  kbl(text_tbl) %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, width = "35%") %>%
-  column_spec(2, width = "35%") %>%
-  column_spec(3, width = "30%") %>%  
-  kable_classic(full_width = F, html_font = "Cambria")
-}
-top_25_other <- function(cat_choice) {
-  top_data <- bestbooks %>% filter(str_detect(Category,cat_choice)) %>% filter(!str_detect(Category,"Series")) %>% arrange(Title)
-  text_tbl <- data.frame(
-    Book = top_data$Title,
-    Author = top_data$Author
-    )
-  kbl(text_tbl) %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, width = "50%") %>%
-  column_spec(2, width = "50%") %>%
-  kable_classic(full_width = F, html_font = "Cambria")
-}
-latest_books <- function(timing) {
-  book_data <- current_list %>% filter(str_detect(Last5,timing)) %>%  arrange(Started)
-text_tbl <- data.frame(
-  Cover ='',
-  Book = book_data$LinkedTitle,
-  Author = book_data$Author,
-  Description = book_data$Description)
-image_table(text_tbl,book_data)
-}
+
 stat_summary <- function(year) {
   totals_year = booklist %>% filter(year(Finished) == year) %>% group_by(FicNonfic) %>% dplyr::summarise(PageCount = sum(Pages),BookCount = n_distinct(Title)) %>% adorn_totals("row", fill = "Total") %>% mutate (PageCount = formatC(round(PageCount),format = "f", big.mark = ",", drop0trailing = TRUE))
 kbl(totals_year)  %>%
@@ -107,27 +58,16 @@ kbl(totals_year)  %>%
   kable_classic(full_width = F, html_font = "Cambria")
 }
 ```
-# Welcome
-As an avid reader and an avid data nerd, I decided to create this site to track some of my reading and favourite books, both for my own interest and for anyone looking for good book recommendations. Links where applicable are to independent bookstores. Support libraries and independent bookstores!
 
-The yearly lists are ordered chronologically rather than ranked.  The author lists are ordered by publication date.
-
-## Current Reading {.tabset .tabset-pills}
-### Books I am currently reading
-```{r}
-latest_books("Current")
-```
-### Last 5 books completed
-```{r}
-latest_books("Last")
-```
 # Yearly Lists
 ## 2023 {.tabset .tabset-pills}
-### Top 10 Fiction
+### Top 20 Fiction
 ```{r}
+year_table("2023F")
 ```
 ### Top 10 Non-Fiction
 ```{r}
+year_table("2023N")
 ```
 ### Stats
 ```{r}
@@ -138,7 +78,7 @@ stat_summary(2023)
 booklist %>% filter(year(Finished) == 2023) %>% datatable()
 ```
 ## 2022 {.tabset .tabset-pills}
-### Top 10 Fiction
+### Top 20 Fiction
 ```{r}
 year_table("2022F")
 ```
@@ -155,7 +95,7 @@ stat_summary(2022)
 booklist %>% filter(year(Finished) == 2022) %>% datatable()
 ```
 ## 2021 {.tabset .tabset-pills}
-### Top 10 Fiction
+### Top 20 Fiction
 ```{r}
 year_table("2021F")
 ```
@@ -172,7 +112,7 @@ stat_summary(2021)
 booklist %>% filter(year(Finished) == 2021) %>% datatable()
 ```
 ## 2020 {.tabset .tabset-pills}
-### Top 10 Fiction
+### Top 20 Fiction
 ```{r}
 year_table("2020F")
 ```
@@ -188,142 +128,45 @@ stat_summary(2020)
 ```{r}
 booklist %>% filter(year(Finished) == 2020) %>% datatable()
 ```
-# Favourite Authors and Series - Excluded from Yearly Lists
-## Favourite Authors {.tabset .tabset-pills}
-### Richard Wagamese
+
+# Longer Lists 
+## Best Books (Unranked) {.tabset .tabset-pills}
+### Top 100 Fiction
 ```{r}
-author_table("Wagamese")
+best_table("Fiction")
+```
+### Top 50 Non-Fiction
+```{r}
+best_table("NonFic")
+```
+### SFF Series
+```{r}
+best_table("Series")
+```
+## Sortable and Searchable Lists {.tabset .tabset-pills}
+### Fiction Read Since 2015
+```{r}
+booklist %>% filter(!str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
+```
+### Non-Fiction Read Since 2015
+```{r}
+booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
+```
+### Unread Bookshelf
+```{r}
+select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+```
+### Read Bookshelf
+```{r}
+select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
 ```
 
-### Fredrik Backman
-```{r}
-author_table("Backman")
-```
-### Becky Chambers
-```{r}
-author_table("Chambers")
-```
-### Thomas King
-```{r}
-author_table("Thomas King")
-```
-## Favourite Sci-Fi / Fantasy Series {.tabset .tabset-pills}
-### The Expanse
-```{r}
-series_table("Expanse")
-```
-### The Murderbot Diaries
-```{r}
-series_table("Murderbot")
-```
-### The Broken Earth Trilogy
-```{r}
-series_table("Broken Earth")
-```
-### The Oxford Time Travel Series
-```{r}
-series_table("Oxford")
-```
-### Remembrance of Earth's Past
-```{r}
-series_table("Remembrance")
-```
-### Hyperion Cantos
-```{r}
-series_table("Hyperion")
-```
-### The Imperial Radch
-```{r}
-series_table("Radch")
-```
-### Teixcalaan
-```{r}
-series_table("Teixcalaan")
-```
-### The Machineries of Empire
-```{r}
-series_table("Machineries")
-```
-
-# Top 25's
-These include books read back to 2015 and occasionally before.
-
-## Fiction {.tabset .tabset-pills}
-### Favourite Authors
-```{r}
-top_25_authors()
-```
-### Earth-based Spec Fic 
-```{r}
-top_25_series("SeriesEarth")
-```
-### Non-Earth Spec Fic Series
-```{r}
-top_25_series("SeriesOther")
-```
-### Speculative Fiction
-```{r}
-top_25_other("Speculative")
-```
-### Contemporary Fiction
-```{r}
-top_25_other("Contemporary")
-```
-### Historical Fiction
-```{r}
-top_25_other("Historical")
-```
-
-## Non-Fiction {.tabset .tabset-pills}
-### History / Memoir / Narrative
-```{r}
-top_25_other("History")
-```
-### Social Justice
-```{r}
-top_25_other("Justice")
-```
-### Science / Nature
-```{r}
-top_25_other("Science")
-```
-### Other Non-Fiction
-```{r}
-top_25_other("Other")
-```
-
-# Full Lists
-Lists are sortable and searchable. First is the fiction and non-fiction I've read since 2015 (when I started tracking), then are the books I currently own, split into read and unread.
-
-## Reading List {.tabset .tabset-pills}
-### Fiction read since 2015
-```{r}
-booklist %>% filter(!str_detect(FicNonfic,"Non")) %>% datatable()
-```
-
-### Non-Fiction read since 2015
-```{r}
-booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable()
-```
-
-## Personal Bookshelf {.tabset .tabset-pills}
-### Unread
-```{r}
-select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable()
-```
-
-### Read
-```{r}
-select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable()
-```
-
-# Looking for Book Recommendations?
-These are some of the sites I look at for book reviews and lists of books.  
-* [Literary Hub](https://lithub.com/) - Recommendations and reviews over all categories  
-* [Book Riot](https://bookriot.com/) - Recommendations and reviews over all categories  
-* [Tor.com](https://www.tor.com/) - Science Fiction and Fantasy  
-* [Book Marks](https://bookmarks.reviews/) - Aggregated reviews of books  
-* [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022) - NPR's favourite books of the year (2022-2013), sortable by many categories  
-* [Literature Map](https://www.literature-map.com/) - Put in an author you like, and find a bunch of new ones you might enjoy  
-* [Five Books](https://fivebooks.com/) - Top 5's in a bunch of categories  
-* [Electric Literature](https://electricliterature.com/) - Reading lists, articles, essays, and more  
+# Sources for Book Lists and Articles
+* [Literary Hub](https://lithub.com/) 
+* [Book Riot](https://bookriot.com/) 
+* [Tor.com](https://www.tor.com/)  
+* [Book Marks](https://bookmarks.reviews/)  
+* [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022)
+* [Literature Map](https://www.literature-map.com/)
+* [Five Books](https://fivebooks.com/) 
+* [Electric Literature](https://electricliterature.com/)
