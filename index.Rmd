@@ -23,7 +23,8 @@ image_table <- function(text_tbl,image_tbl) {
   kbl(text_tbl) %>%
   column_spec(1, image = spec_image(image_tbl$Image,186,300), width = "20%") %>%
   column_spec(2, width = "80%") %>%
-  kable_classic(html_font = "Cambria")
+  kable_classic(html_font = "Cambria") %>%
+  scroll_box(width = "100%", height = "600px")
 }
 
 year_table <- function(yearbest) {
