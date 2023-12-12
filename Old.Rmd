@@ -1,0 +1,142 @@
+---
+title: "A Place For My Books"
+
+output: rmdformats::readthedown
+---
+
+```{r setup, echo = FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(DT)
+library(googlesheets4)
+library(kableExtra)
+library(lubridate)
+library(janitor)
+
+allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% as_tibble() %>%  mutate_at(c("Published","Started","Finished"),ymd)
+
+bestbooks <- allbooks %>% select(c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image)) 
+
+booklist<-select(filter(bestbooks, !is.na(Started)),c(Title,Author,Started,Finished,Pages,FicNonfic))
+
+image_table <- function(text_tbl,image_tbl) {
+  kbl(text_tbl) %>%
+  column_spec(1, image = spec_image(image_tbl$Image,186,300), width = "20%") %>%
+  column_spec(2, width = "80%") %>%
+  kable_classic(html_font = "Cambria")
+}
+
+year_table <- function(yearbest) {
+  year_data <- bestbooks %>% filter(str_detect(BestCat,yearbest)) %>% arrange (Finished)
+  text_tbl <- data.frame(
+  Cover ='',
+  Book = str_c(year_data$LinkedTitle," by ",year_data$Author))
+  image_table(text_tbl,year_data) 
+}
+
+stat_summary <- function(year) {
+  totals_year = booklist %>% filter(year(Finished) == year) %>% group_by(FicNonfic) %>% dplyr::summarise(PageCount = sum(Pages),BookCount = n_distinct(Title)) %>% adorn_totals("row", fill = "Total") %>% mutate (PageCount = formatC(round(PageCount),format = "f", big.mark = ",", drop0trailing = TRUE))
+kbl(totals_year)  %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, width = "50%") %>%
+  column_spec(2, width = "50%") %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+}
+```
+
+# Lists
+## Sortable and Searchable Lists {.tabset .tabset-pills}
+### Fiction Read Since 2015
+```{r}
+booklist %>% filter(!str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
+```
+### Non-Fiction Read Since 2015
+```{r}
+booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
+```
+### Unread Bookshelf
+```{r}
+select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+```
+### Read Bookshelf
+```{r}
+select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+```
+## 2023 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2023F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2023N")
+```
+### Stats
+```{r}
+stat_summary(2023)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2023) %>% datatable()
+```
+## 2022 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2022F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2022N")
+```
+### Stats
+```{r}
+stat_summary(2022)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2022) %>% datatable()
+```
+## 2021 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2021F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2021N")
+```
+### Stats
+```{r}
+stat_summary(2021)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2021) %>% datatable()
+```
+## 2020 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2020F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2020N")
+```
+### Stats
+```{r}
+stat_summary(2020)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2020) %>% datatable()
+```
+
+# Sources for Book Lists and Articles
+* [Literary Hub](https://lithub.com/) 
+* [Book Riot](https://bookriot.com/) 
+* [Tor.com](https://www.tor.com/)  
+* [Book Marks](https://bookmarks.reviews/)  
+* [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022)
+* [Literature Map](https://www.literature-map.com/)
+* [Five Books](https://fivebooks.com/) 
+* [Electric Literature](https://electricliterature.com/)
