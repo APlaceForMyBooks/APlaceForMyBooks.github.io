@@ -15,38 +15,23 @@ library(janitor)
 
 allbooks <- read_sheet(ss = '1_qKs7DbC-8uJoCV5WfgvDMLSOFKgKH7VRDWSsYch540') %>% as_tibble() %>%  mutate_at(c("Published","Started","Finished"),ymd)
 
-bestbooks <- allbooks %>% select(c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image,Description)) 
+bestbooks <- allbooks %>% select(c(Title,Author,Published,Started,Finished,Pages,FicNonfic,Genre,Series,Category,BestCat,LinkedTitle,Image)) 
 
 booklist<-select(filter(bestbooks, !is.na(Started)),c(Title,Author,Started,Finished,Pages,FicNonfic))
 
 image_table <- function(text_tbl,image_tbl) {
   kbl(text_tbl) %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, image = spec_image(image_tbl$Image,124,200), width = "10%") %>%
-  column_spec(2, width = "15%") %>%
-  column_spec(3, width = "15%") %>%
-  column_spec(4, width = "60%") %>%
-  kable_classic(full_width = F, html_font = "Cambria")
-}
-
-best_table <- function(best_cat) {
-  best_data <- bestbooks %>%  filter(str_detect(Category,best_cat)) %>% arrange(Author,Published)
-text_tbl <- data.frame(
-  Cover ='',
-  Book = best_data$LinkedTitle,
-  Author = best_data$Author,
-  Description = best_data$Description)
-image_table(text_tbl,best_data)
+  column_spec(1, image = spec_image(image_tbl$Image,186,300), width = "20%") %>%
+  column_spec(2, width = "80%") %>%
+  kable_classic(html_font = "Cambria")
 }
 
 year_table <- function(yearbest) {
   year_data <- bestbooks %>% filter(str_detect(BestCat,yearbest)) %>% arrange (Finished)
   text_tbl <- data.frame(
-  Covers ='',
-  Book = year_data$LinkedTitle,
-  Author = year_data$Author,
-  Description = year_data$Description)
-image_table(text_tbl,year_data)
+  Cover ='',
+  Book = str_c(year_data$LinkedTitle," by ",year_data$Author))
+  image_table(text_tbl,year_data) 
 }
 
 stat_summary <- function(year) {
@@ -59,90 +44,7 @@ kbl(totals_year)  %>%
 }
 ```
 
-# Yearly Lists
-## 2023 {.tabset .tabset-pills}
-### Top 20 Fiction
-```{r}
-year_table("2023F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2023N")
-```
-### Stats
-```{r}
-stat_summary(2023)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2023) %>% datatable()
-```
-## 2022 {.tabset .tabset-pills}
-### Top 20 Fiction
-```{r}
-year_table("2022F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2022N")
-```
-### Stats
-```{r}
-stat_summary(2022)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2022) %>% datatable()
-```
-## 2021 {.tabset .tabset-pills}
-### Top 20 Fiction
-```{r}
-year_table("2021F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2021N")
-```
-### Stats
-```{r}
-stat_summary(2021)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2021) %>% datatable()
-```
-## 2020 {.tabset .tabset-pills}
-### Top 20 Fiction
-```{r}
-year_table("2020F")
-```
-### Top 10 Non-Fiction
-```{r}
-year_table("2020N")
-```
-### Stats
-```{r}
-stat_summary(2020)
-```
-### All Books
-```{r}
-booklist %>% filter(year(Finished) == 2020) %>% datatable()
-```
-
-# Longer Lists 
-## Best Books (Unranked) {.tabset .tabset-pills}
-### Top 100 Fiction
-```{r}
-best_table("Fiction")
-```
-### Top 50 Non-Fiction
-```{r}
-best_table("NonFic")
-```
-### SFF Series
-```{r}
-best_table("Series")
-```
+# Lists
 ## Sortable and Searchable Lists {.tabset .tabset-pills}
 ### Fiction Read Since 2015
 ```{r}
@@ -159,6 +61,74 @@ select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Aut
 ### Read Bookshelf
 ```{r}
 select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+```
+## 2023 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2023F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2023N")
+```
+### Stats
+```{r}
+stat_summary(2023)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2023) %>% datatable()
+```
+## 2022 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2022F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2022N")
+```
+### Stats
+```{r}
+stat_summary(2022)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2022) %>% datatable()
+```
+## 2021 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2021F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2021N")
+```
+### Stats
+```{r}
+stat_summary(2021)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2021) %>% datatable()
+```
+## 2020 {.tabset .tabset-pills}
+### Top Fiction
+```{r}
+year_table("2020F")
+```
+### Top Non-Fiction
+```{r}
+year_table("2020N")
+```
+### Stats
+```{r}
+stat_summary(2020)
+```
+### All Books
+```{r}
+booklist %>% filter(year(Finished) == 2020) %>% datatable()
 ```
 
 # Sources for Book Lists and Articles
