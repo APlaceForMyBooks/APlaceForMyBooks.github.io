@@ -6,7 +6,8 @@ output: rmdformats::readthedown
 
 ```{r setup, echo = FALSE, message = FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
-library(tidyverse)
+library(dplyr)
+library(stringr)
 library(DT)
 library(googlesheets4)
 library(kableExtra)
@@ -46,98 +47,144 @@ kbl(totals_year)  %>%
 ```
 
 # Lists
+
 ## Sortable and Searchable Lists {.tabset .tabset-pills}
+
 ### Fiction Read Since 2015
+
 ```{r}
 booklist %>% filter(!str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
 ```
+
 ### Non-Fiction Read Since 2015
+
 ```{r}
 booklist %>% filter(str_detect(FicNonfic,"Non")) %>% datatable(filter = "top")
 ```
+
 ### Unread Bookshelf
+
 ```{r}
-select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+select(filter(allbooks,(is.na(Started) | Order == "U") & Owned == '1'),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
 ```
+
 ### Read Bookshelf
+
 ```{r}
-select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == 1),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
+select(filter(allbooks,(!is.na(Finished) | Order == "R") & Owned == '1'),c(Title,Author,Pages,FicNonfic,Genre,Published)) %>% arrange(Title) %>% datatable(filter = "top")
 ```
+
 ## 2023 {.tabset .tabset-pills}
+
 ### Top Fiction
+
 ```{r}
 year_table("2023F")
 ```
+
 ### Top Non-Fiction
+
 ```{r}
 year_table("2023N")
 ```
+
 ### Stats
+
 ```{r}
 stat_summary(2023)
 ```
+
 ### All Books
+
 ```{r}
 booklist %>% filter(year(Finished) == 2023) %>% datatable()
 ```
+
 ## 2022 {.tabset .tabset-pills}
+
 ### Top Fiction
+
 ```{r}
 year_table("2022F")
 ```
+
 ### Top Non-Fiction
+
 ```{r}
 year_table("2022N")
 ```
+
 ### Stats
+
 ```{r}
 stat_summary(2022)
 ```
+
 ### All Books
+
 ```{r}
 booklist %>% filter(year(Finished) == 2022) %>% datatable()
 ```
+
 ## 2021 {.tabset .tabset-pills}
+
 ### Top Fiction
+
 ```{r}
 year_table("2021F")
 ```
+
 ### Top Non-Fiction
+
 ```{r}
 year_table("2021N")
 ```
+
 ### Stats
+
 ```{r}
 stat_summary(2021)
 ```
+
 ### All Books
+
 ```{r}
 booklist %>% filter(year(Finished) == 2021) %>% datatable()
 ```
+
 ## 2020 {.tabset .tabset-pills}
+
 ### Top Fiction
+
 ```{r}
 year_table("2020F")
 ```
+
 ### Top Non-Fiction
+
 ```{r}
 year_table("2020N")
 ```
+
 ### Stats
+
 ```{r}
 stat_summary(2020)
 ```
+
 ### All Books
+
 ```{r}
 booklist %>% filter(year(Finished) == 2020) %>% datatable()
 ```
 
 # Sources for Book Lists and Articles
-* [Literary Hub](https://lithub.com/) 
-* [Book Riot](https://bookriot.com/) 
-* [Tor.com](https://www.tor.com/)  
-* [Book Marks](https://bookmarks.reviews/)  
-* [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022)
-* [Literature Map](https://www.literature-map.com/)
-* [Five Books](https://fivebooks.com/) 
-* [Electric Literature](https://electricliterature.com/)
+
+-   [Literary Hub](https://lithub.com/)
+-   [Book Riot](https://bookriot.com/)
+-   [Tor.com](https://www.tor.com/)\
+-   [Book Marks](https://bookmarks.reviews/)\
+-   [NPR Books](https://apps.npr.org/best-books/#view=covers&year=2022)
+-   [Literature Map](https://www.literature-map.com/)
+-   [Five Books](https://fivebooks.com/)
+-   [Electric Literature](https://electricliterature.com/)
